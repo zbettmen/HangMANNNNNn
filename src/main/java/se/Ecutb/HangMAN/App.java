@@ -1,3 +1,4 @@
+
 package se.Ecutb.HangMAN;
 
 import java.util.Scanner;
@@ -27,12 +28,12 @@ public class App {
         }
     }
 
-    void play() {
+   private void play() {
 
         game = new HangMan();
         System.out.println("Hangman!");
 
-        while (!game.isWinner() && game.getNumbOfGuesses() != game.getMaxNumbOfGuesses()) {
+        while (!game.Winner() && game.getNumbOfGuesses() != game.getMaxNumbOfGuesses()) {
             System.out.println("ord: " + game.getNumbOfGuesses() + " of 8.");
             rightLettersGuessed();
             System.out.println(game.getGuesses());
@@ -42,7 +43,7 @@ public class App {
             String message = game.guessMade(guess);
             System.out.println(message);
         }
-        if (game.isWinner()) {
+        if (game.Winner()) {
             rightLettersGuessed();
             System.out.println("ordet var : " + game.getRandomWord());
         } else {
@@ -53,7 +54,7 @@ public class App {
         }
     }
 
-    void rightLettersGuessed() {
+    private void rightLettersGuessed() {
 
         for (char letter : game.getWordsArray()) {
             System.out.print(letter + " ");

@@ -1,9 +1,12 @@
 package se.Ecutb.HangMAN;
 
+import java.util.Random;
+
 public class HangMan {
+    Random random = new Random();
 
     private String[] words = { "Tauren", "Alliance", "Horde","wow","Classic" };
-    private String randomWord = words[(int) (Math.random() * words.length)];
+    private String randomWord = words[random.nextInt(words.length)].toUpperCase();
     private char[] wordsArray;
     private StringBuilder guesses;
     private int numbOfGuesses;
@@ -15,9 +18,6 @@ public class HangMan {
         this.guesses = new StringBuilder();
         this.numbOfGuesses = 0;
 
-        for (int i = 0; i < wordsArray.length; i++) {
-            wordsArray[i] = '_';
-        }
     }
 
     public HangMan(String försök) {
@@ -37,28 +37,28 @@ public class HangMan {
         guess = guess.trim();
 
         if (guess.length() == 1) {
-            return guessedLetterMade(guess.charAt(0));
+            return guessedLetter(guess.charAt(0));
         } else {
             if (guess.length() > 1) {
-                return guessedWordMade(guess).toUpperCase();
+                return guessedWord(guess).toUpperCase();
             }
         }
 
         return "Försök igen!";
     }
 
-    public String guessedLetterMade(char letter) {
+    public String guessedLetter(char letter) {
 
-        if (checkIfLetterAlreadyHaveBeenEnterd(letter)) {
+        if (checkLetter(letter)) {
             return "du har redan gissat: " + letter;
 
         }
-        else if (checkIfLetterIsInWord(letter)) {
+        else if (checkIfLetterWord(letter)) {
             numbOfGuesses++;
             return " " + letter + " !";
 
         }
-        else if (!checkIfLetterIsInWord(letter)) {
+        else if (!checkIfLetterWord(letter)) {
             guesses.append(letter);
             numbOfGuesses++;
             return "Försök igen : " + letter + " är inte ordet";
@@ -67,7 +67,7 @@ public class HangMan {
         return "";
     }
 
-    public String guessedWordMade(String word) {
+    public String guessedWord(String word) {
 
         if (checkIflsWord(word)) {
             numbOfGuesses++;
@@ -83,7 +83,7 @@ public class HangMan {
         return "r";
     }
 
-    public boolean checkIfLetterIsInWord(char letter) {
+    public boolean checkIfLetterWord(char letter) {
 
         boolean isInWord = false;
 
@@ -109,7 +109,7 @@ public class HangMan {
         return Words;
     }
 
-    public boolean checkIfLetterAlreadyHaveBeenEnterd(char letter) {
+    public boolean checkLetter(char letter) {
 
         boolean alreadyEnterd = false;
 
@@ -128,7 +128,7 @@ public class HangMan {
         return alreadyEnterd;
     }
 
-    public boolean isWinner() {
+    public boolean Winner() {
 
         boolean wordIsComplete = String.valueOf(wordsArray).equals(randomWord);
 
@@ -157,3 +157,5 @@ public class HangMan {
     }
 
 }
+
+
