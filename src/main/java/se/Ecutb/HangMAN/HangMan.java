@@ -1,12 +1,13 @@
 package se.Ecutb.HangMAN;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class HangMan {
     Random random = new Random();
 
     private String[] words = { "Tauren", "Alliance", "Horde","wow","Classic" };
-    private String randomWord = words[random.nextInt(words.length)].toUpperCase();
+    private String randomWord = words[random.nextInt(words.length)].toLowerCase();
     private char[] wordsArray;
     private StringBuilder guesses;
     private int numbOfGuesses;
@@ -34,7 +35,7 @@ public class HangMan {
 
     public String guessMade(String guess) {
 
-        guess = guess.trim();
+        
 
         if (guess.length() == 1) {
             return guessedLetter(guess.charAt(0));
